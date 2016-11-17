@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Re4les</title>
+      <!-- css frameworks -->
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="bower_components/angularjs-slider/dist/rzslider.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+
+      <!-- custome css styles -->
+    <link rel="stylesheet" href="styles/master.css" media="screen" title="no title" charset="utf-8">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+  </head>
+  <body ng-app="app">
+    <div id="wrapper" ng-controller="mainController as mainCtrl">
+      <nav class="navbar navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">LOGO</a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <form class="navbar-form navbar-left" ng-submit="search()">
+              <div class="form-group">
+                <input id="nav-search"  type="text" class="form-control" placeholder="SEARCH">
+                <svg height="31" width="30" id="searchSvg" fill="#494949">
+                  <path d="M10 1q1.828 0 3.496 0.715t2.871 1.918 1.918 2.871 0.715 3.496q0 1.57-0.512 3.008t-1.457 2.609l5.68 5.672q0.289 0.289 0.289 0.711 0 0.43-0.285 0.715t-0.715 0.285q-0.422 0-0.711-0.289l-5.672-5.68q-1.172 0.945-2.609 1.457t-3.008 0.512q-1.828 0-3.496-0.715t-2.871-1.918-1.918-2.871-0.715-3.496 0.715-3.496 1.918-2.871 2.871-1.918 3.496-0.715zM10 3q-1.422 0-2.719 0.555t-2.234 1.492-1.492 2.234-0.555 2.719 0.555 2.719 1.492 2.234 2.234 1.492 2.719 0.555 2.719-0.555 2.234-1.492 1.492-2.234 0.555-2.719-0.555-2.719-1.492-2.234-2.234-1.492-2.719-0.555z" />
+                </svg>
+              </div>
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="active"> <a href="#">SIGN IN<span class="sr-only">(current)</span></a></li>
+              <li> <a href="#">SIGN UP</a></li>
+              <li id="outline-btn" > <a href="#" >LIST YOUR HOME</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="col-md-6 list-section">
+
+        <div class="filters">
+          <div class="filter-caption">
+            <p>FILTERS</p>
+          </div>
+          <div class="text-center">
+            <select ng-model="query.offers" class="selectpicker">
+                <option disabled hidden value="">Offers</option>
+                <option value="buy">For Sale</option>
+                <option value="rent">For Rent</option>
+                <option value="buy-rent">For Sale/Rent</option>
+            </select>
+            <select ng-model="query.type__exact" class="selectpicker">
+                <option disabled hidden value="">Type</option>
+                <option value="apartment">Apartments</option>
+                <option value="barn-conversion">Barn Conversion</option>
+                <option value="block-of-apartments">Block Of Apartments</option>
+                <option value="bungalow">Bungalows</option>
+                <option value="castle">Castles</option>
+                <option value="cave-house">Cave Houses</option>
+                <option value="chalet">Chalet</option>
+                <option value="character-property">Character Properties</option>
+                <option value="cluster-house">Cluster Houses</option>
+                <option value="commercial-development">Commercial Developments</option>
+                <option value="commercial-office">Commercial Offices</option>
+                <option value="commercial-property">Commercial Properties</option>
+                <option value="commercial-space">Commercial Space</option>
+                <option value="commercial-warehouses">Commercial Warehouses</option>
+                <option value="corporate-office">Corporate Offices</option>
+                <option value="cortijo">Cortijos</option>
+                <option value="cottage">Cottages</option>
+                <option value="country-house">Country Houses</option>
+                <option value="detached-bungalow">Detached Bungalows</option>
+                <option value="detached-house">Detached Houses</option>
+                <option value="detached-villa">Detached Villas</option>
+                <option value="commercial-warehouses">Commercial Warehouses</option>
+                <option value="duplex">Duplexes</option>
+                <option value="end-of-terrace-house">End Of Terrace Houses</option>
+                <option value="farm-house">Farm Houses</option>
+                <option value="finca">Fincas</option>
+                <option value="flat">Flats</option>
+                <option value="ground-floor-flat">Ground Floor Flats</option>
+                <option value="guest-house">Guest Houses</option>
+                <option value="healthcare-facility">Healthcare Facilities</option>
+                <option value="hospitality">Hospitalities</option>
+                <option value="hotel">Hotel</option>
+                <option value="hotel-room">Hotel Rooms</option>
+                <option value="house">Houses</option>
+                <option value="house-of-multiple-occupation">Houses Of Multiple Occupation</option>
+                <option value="industrial-building">Industrial Buildings</option>
+                <option value="land">Land</option>
+                <option value="leisure-facility">Leisure Facilities</option>
+                <option value="light-industrial">Light Industrial</option>
+                <option value="lodge">Lodges</option>
+                <option value="manor-house">Manor House</option>
+                <option value="mill">Mills</option>
+                <option value="mixed-use">Mixed Use</option>
+                <option value="office">Office</option>
+                <option value="penthouse">Penthouses</option>
+                <option value="plot">Plot</option>
+                <option value="property">Property</option>
+                <option value="pubs">Pubs</option>
+                <option value="residencial-land">Residential Land</option>
+                <option value="residential-development">Residential Developments</option>
+                <option value="restaurants">Restaurants</option>
+                <option value="retail-property-high-street">Retail Property (High Street)</option>
+                <option value="semi-detached-bungalow">Semi-Detached Bungalows</option>
+                <option value="semi-detached-house">Semi-Detached Houses</option>
+                <option value="semi-detached-house">Semi-Detached Houses</option>
+                <option value="semi-detached-villa">Semi-Detached Villas</option>
+                <option value="serviced-apartment">Serviced Apartments</option>
+                <option value="shops">Shops</option>
+                <option value="stately-home">Stately Homes</option>
+                <option value="stone-house">Stone Houses</option>
+                <option value="stone-house">Stone Houses</option>
+                <option value="studio-apartment">Studio Apartments</option>
+                <option value="studio-flat">Studio Flats</option>
+                <option value="terraced-bungalow">Terraced Bungalows</option>
+                <option value="terraced-house">Terraced Houses</option>
+                <option value="pubs">Pubs</option>
+                <option value="town-house">Town Houses</option>
+                <option value="triplex">Triplexes</option>
+                <option value="villa">Villas</option>
+                <option value="village-house">Village Houses</option>
+                <option value="warehouse">Warehouses</option>
+            </select>
+
+            <select ng-model="query.beds__exact" class="selectpicker">
+                <option disabled hidden value="">Bedrooms</option>
+                <option value="1">1 bedroom</option>
+                <option value="2">2 bedrooms</option>
+                <option value="3">3 bedrooms</option>
+                <option value="4">4 bedrooms</option>
+                <option value="5">5 bedrooms</option>
+                <option value="6">6 bedrooms</option>
+                <option value="7">7 bedrooms</option>
+                <option value="8">8 bedrooms</option>
+
+            </select>
+            <select ng-model="query.baths__exact" class="selectpicker">
+                <option disabled hidden value="">Bathrooms</option>
+                <option value="1">1 Bathroom</option>
+                <option value="2">2 bathrooms</option>
+                <option value="3">3 bathrooms</option>
+                <option value="4">4 bathrooms</option>
+            </select>
+
+        </div>
+      </div>
+       <div class="filters">
+          <div class="filter-caption">
+            <p>PRICE RANGE</p>
+          </div>
+            <rzslider rz-slider-model="query.price__gte" rz-slider-high="query.price__lt" rz-slider-options="slider.options"></rzslider>
+        </div>
+        <button class="btn btn-primary btn-custom" ng-click="search()">Refresh results</button>
+        <hr>
+        <!-- <p>
+          {{query.q}}
+          {{query.price__gte}}
+          {{query.price__lt}}
+          {{query.baths__exact}}
+          {{query.beds__exact}}
+          {{query.offers}}
+          {{query.type__exact}}
+        </p> -->
+
+        <!-- <div class="row"> -->
+          <div class="col-sm-6 col-md-6" ng-repeat="house in houses | filter:myfilter | orderBy:'price'">
+              <div class="thumbnail">
+                <a href="house.absolute_url">
+                  <!-- <img src="house.image" alt=""> -->
+                  <img src="images/img.jpg" alt="">
+                  <div class="price-tag">
+                    <p> {{house.price}}$</p>
+                  </div>
+                  <div class="user-img pull-right">
+                    <img class="img-circle" src="images/user.jpg" alt="" />
+                  </div>
+                  <div class="caption">
+                    <h3>{{house.title}}</h3>
+                    <p>{{house.beds}} Bedrooms . {{house.baths}} Bathrooms . {{house.offer}} </p>
+                  </div>
+                </a>
+              </div>
+          </div>
+
+    </div>
+    <div id="map" class="pull-right"></div>
+
+
+  <!-- JS frameworks -->
+  <script type="text/javascript" src="bower_components/angular/angular.min.js"></script>
+  <script type="text/javascript" src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
+  <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"> </script>
+  <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"> </script>
+  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+  <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+
+  <!-- my scripts -->
+  <script type="text/javascript" src="app/app.js"></script>
+
+  <script type="text/javascript">
+    var mymap = L.map('map').setView([51.505, -0.09], 13);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(mymap);
+  </script>
+  </body>
+</html>

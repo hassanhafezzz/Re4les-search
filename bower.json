@@ -1,0 +1,25 @@
+{
+  "name": "re4les",
+  "authors": [
+    "hassanhafezzz <hassan1hafez@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "index.html",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "fontawesome#^4.7.0",
+    "angular": "1.5.8"
+  },
+  "dependencies": {
+    "angularjs-slider": "^5.8.7"
+  }
+}
