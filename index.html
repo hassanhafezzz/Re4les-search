@@ -31,13 +31,13 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">LOGO</a>
+            <a class="navbar-brand" href="#">LOGO</a>
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <form class="navbar-form navbar-left" ng-submit="search()">
               <div class="form-group">
-                <input id="nav-search" type="text" class="form-control" placeholder="SEARCH FOR AN ADDRESS">
+                <input id="nav-search" ng-model="query.text" type="text" class="form-control" placeholder="SEARCH">
                 <svg height="31" width="30" id="searchSvg" fill="#494949">
                   <path d="M10 1q1.828 0 3.496 0.715t2.871 1.918 1.918 2.871 0.715 3.496q0 1.57-0.512 3.008t-1.457 2.609l5.68 5.672q0.289 0.289 0.289 0.711 0 0.43-0.285 0.715t-0.715 0.285q-0.422 0-0.711-0.289l-5.672-5.68q-1.172 0.945-2.609 1.457t-3.008 0.512q-1.828 0-3.496-0.715t-2.871-1.918-1.918-2.871-0.715-3.496 0.715-3.496 1.918-2.871 2.871-1.918 3.496-0.715zM10 3q-1.422 0-2.719 0.555t-2.234 1.492-1.492 2.234-0.555 2.719 0.555 2.719 1.492 2.234 2.234 1.492 2.719 0.555 2.719-0.555 2.234-1.492 1.492-2.234 0.555-2.719-0.555-2.719-1.492-2.234-2.234-1.492-2.719-0.555z" />
                 </svg>
@@ -148,6 +148,9 @@
                 <option value="6">6 bedrooms</option>
                 <option value="7">7 bedrooms</option>
                 <option value="8">8 bedrooms</option>
+                <option value="9">9 bedrooms</option>
+                <option value="10">10 bedrooms</option>
+                <option value="11">11 bedrooms</option>
 
             </select>
             <select ng-model="query.baths__exact" class="selectpicker">
@@ -156,6 +159,8 @@
                 <option value="2">2 bathrooms</option>
                 <option value="3">3 bathrooms</option>
                 <option value="4">4 bathrooms</option>
+                <option value="5">5 bathrooms</option>
+                <option value="6">6 bathrooms</option>
             </select>
 
         </div>
@@ -168,30 +173,32 @@
         </div>
         <button class="btn btn-primary btn-custom" ng-click="search()">Refresh results</button>
         <hr>
-
+        <p> we found {{count}} results </p>
         <div class="col-sm-6 col-md-6" ng-repeat="house in mainCtrl.houses">
             <div class="thumbnail">
               <a href="{{house.absolute_url}}">
-                <img src="{{house.image}}"  alt="{{house.title}}">
-                <!-- <img src="{{house.image}}" alt=""> -->
+                <!-- <img src="{{house.image}}"  alt="{{house.title}}"> -->
+                <img src="images/img.jpg" alt="">
                 <div class="price-tag">
-                  <p> {{house.price}}$</p>
+                  <p> {{house.price | currency}}</p>
                 </div>
-                <div class="user-img pull-right">
+                <!-- <div class="user-img pull-right">
                   <img class="img-circle" src="images/user.jpg" alt="" />
-                </div>
+                </div> -->
                 <div class="caption">
                   <h3>{{house.title}}</h3>
-                  <p>{{house.beds}} Bedrooms . {{house.baths}} Bathrooms . {{house.offer}} </p>
+                  <p> {{house.offer}}  . {{house.beds}} Bedrooms . {{house.baths}} Bathrooms </p>
                 </div>
               </a>
             </div>
         </div>
 
-        <div class="" style="clear:both; text-align:center;">
-          <ul class="pagination align-center">
-            <li><a ng-click="prev()" >Prev</a></li>
-            <li><a ng-click="next()" >Next</a></li>
+        <div style="clear:both; text-align:center;">
+          <div class="pagination caption">
+            <p> page {{counter}} of  {{pageNumber}} pages </p>
+          <ul class="pager" align-center>
+            <li><a ng-click="prev()" ng-class="{disabled : reachMinLimit}">Prev</a></li>
+            <li><a ng-click="next()" ng-class="{disabled : reachMaxLimit}" >Next</a></li>
           </ul>
         </div>
     </div>
@@ -203,7 +210,7 @@
   <script type="text/javascript" src="bower_components/angularjs-slider/dist/rzslider.min.js"></script>
   <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"> </script>
   <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"> </script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script> -->
   <script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
 
   <!-- my scripts -->

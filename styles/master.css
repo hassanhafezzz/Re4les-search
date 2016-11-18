@@ -175,7 +175,7 @@ html, body{
 .price-tag{
   position: relative;
   margin-top: -60px;
-  width: 34%;
+  width: 40%;
   background-color: #397dec;
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -183,7 +183,7 @@ html, body{
 }
 .price-tag p{
  color: #fff;
- padding: 10px 15px;
+ padding: 10px 10px;
 }
 .user-img{
   position: relative;
@@ -224,17 +224,18 @@ html, body{
 .pac-container {
     z-index: 1051 !important;
 }
-
-.pagination>li>a, .pagination>li>span {
-    position: relative;
-    float: left;
-    padding: 6px 12px;
-    margin-left: -1px;
-    line-height: 1.42857143;
-    font-size: 16px;
-    color: #397dec;
-    text-decoration: none;
+.pager li>a, .pager li>span {
+    display: inline-block;
+    padding: 5px 14px;
     background-color: #fff;
     border: 1px solid #397dec;
-    cursor: pointer;
+    color: #397dec;
+    border-radius: 15px;    cursor: pointer;
+
+}
+.disabled{
+  pointer-events: none;
+  cursor: default !important;;
+  color: #868686 !important;;
+  border: 1px solid #868686 !important;;
 }
