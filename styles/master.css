@@ -224,3 +224,17 @@ html, body{
 .pac-container {
     z-index: 1051 !important;
 }
+
+.pagination>li>a, .pagination>li>span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: -1px;
+    line-height: 1.42857143;
+    font-size: 16px;
+    color: #397dec;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #397dec;
+    cursor: pointer;
+}

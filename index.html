@@ -37,7 +37,7 @@
 
             <form class="navbar-form navbar-left" ng-submit="search()">
               <div class="form-group">
-                <input id="nav-search"  type="text" class="form-control" placeholder="SEARCH">
+                <input id="nav-search" type="text" class="form-control" placeholder="SEARCH FOR AN ADDRESS">
                 <svg height="31" width="30" id="searchSvg" fill="#494949">
                   <path d="M10 1q1.828 0 3.496 0.715t2.871 1.918 1.918 2.871 0.715 3.496q0 1.57-0.512 3.008t-1.457 2.609l5.68 5.672q0.289 0.289 0.289 0.711 0 0.43-0.285 0.715t-0.715 0.285q-0.422 0-0.711-0.289l-5.672-5.68q-1.172 0.945-2.609 1.457t-3.008 0.512q-1.828 0-3.496-0.715t-2.871-1.918-1.918-2.871-0.715-3.496 0.715-3.496 1.918-2.871 2.871-1.918 3.496-0.715zM10 3q-1.422 0-2.719 0.555t-2.234 1.492-1.492 2.234-0.555 2.719 0.555 2.719 1.492 2.234 2.234 1.492 2.719 0.555 2.719-0.555 2.234-1.492 1.492-2.234 0.555-2.719-0.555-2.719-1.492-2.234-2.234-1.492-2.719-0.555z" />
                 </svg>
@@ -138,7 +138,6 @@
                 <option value="village-house">Village Houses</option>
                 <option value="warehouse">Warehouses</option>
             </select>
-
             <select ng-model="query.beds__exact" class="selectpicker">
                 <option disabled hidden value="">Bedrooms</option>
                 <option value="1">1 bedroom</option>
@@ -169,36 +168,32 @@
         </div>
         <button class="btn btn-primary btn-custom" ng-click="search()">Refresh results</button>
         <hr>
-        <!-- <p>
-          {{query.q}}
-          {{query.price__gte}}
-          {{query.price__lt}}
-          {{query.baths__exact}}
-          {{query.beds__exact}}
-          {{query.offers}}
-          {{query.type__exact}}
-        </p> -->
 
-        <!-- <div class="row"> -->
-          <div class="col-sm-6 col-md-6" ng-repeat="house in houses | filter:myfilter | orderBy:'price'">
-              <div class="thumbnail">
-                <a href="house.absolute_url">
-                  <!-- <img src="house.image" alt=""> -->
-                  <img src="images/img.jpg" alt="">
-                  <div class="price-tag">
-                    <p> {{house.price}}$</p>
-                  </div>
-                  <div class="user-img pull-right">
-                    <img class="img-circle" src="images/user.jpg" alt="" />
-                  </div>
-                  <div class="caption">
-                    <h3>{{house.title}}</h3>
-                    <p>{{house.beds}} Bedrooms . {{house.baths}} Bathrooms . {{house.offer}} </p>
-                  </div>
-                </a>
-              </div>
-          </div>
+        <div class="col-sm-6 col-md-6" ng-repeat="house in mainCtrl.houses">
+            <div class="thumbnail">
+              <a href="{{house.absolute_url}}">
+                <img src="images/img.jpg" alt="{{house.title}}">
+                <!-- <img src="{{house.image}}" alt=""> -->
+                <div class="price-tag">
+                  <p> {{house.price}}$</p>
+                </div>
+                <div class="user-img pull-right">
+                  <img class="img-circle" src="images/user.jpg" alt="" />
+                </div>
+                <div class="caption">
+                  <h3>{{house.title}}</h3>
+                  <p>{{house.beds}} Bedrooms . {{house.baths}} Bathrooms . {{house.offer}} </p>
+                </div>
+              </a>
+            </div>
+        </div>
 
+        <div class="" style="clear:both; text-align:center;">
+          <ul class="pagination align-center">
+            <li><a ng-click="prev()" >Prev</a></li>
+            <li><a ng-click="next()" >Next</a></li>
+          </ul>
+        </div>
     </div>
     <div id="map" class="pull-right"></div>
 
@@ -213,6 +208,8 @@
 
   <!-- my scripts -->
   <script type="text/javascript" src="app/app.js"></script>
+  <script type="text/javascript" src="app/data.service.js"></script>
+
 
   <script type="text/javascript">
     var mymap = L.map('map').setView([51.505, -0.09], 13);
